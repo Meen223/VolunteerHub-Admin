@@ -1,17 +1,25 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { type Activity } from '../../../types'
+// src/components/Card/cloer/DetailsCard.tsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { type Activity } from '../../../types';
 
 export interface DetailsCardProps {
-  activity: Activity
+  activity: Activity;
 }
 
 const DetailsCard: React.FC<DetailsCardProps> = ({ activity }) => {
   return (
     <div className="border rounded-lg shadow bg-pink-100 hover:bg-pink-200">
+      {/* สถานะกิจกรรม */}
       <div className="flex justify-end px-4 py-1 text-sm font-semibold text-pink-700">
-        {activity.status }
+        {activity.status}
       </div>
+
+      {/* ชื่อประเภทกิจกรรม */}
+      <div className="flex justify-end px-4 py-1 text-sm font-semibold text-pink-700">
+        {activity.activity_type_name}
+      </div>
+
       <div className="px-6 py-4 bg-white rounded-b-lg">
         <h3 className="font-bold text-lg border-b border-gray-300 pb-1 mb-3">
           {activity.title}
@@ -35,8 +43,7 @@ const DetailsCard: React.FC<DetailsCardProps> = ({ activity }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DetailsCard
-
+export default DetailsCard;
