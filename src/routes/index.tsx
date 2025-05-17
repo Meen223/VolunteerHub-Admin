@@ -15,11 +15,11 @@ import Close from "../pages/Close.admin";
 import EditForm from "../pages/EditForm";
 
 export const routes: RouteObject[] = [
-  
   { path: "/", element: <Loginpageadmin /> },
   { path: "/home", element: <HomepageAdmin /> },
   { path: "/approve-activity", element: <Apporove /> },
-  { path: "/edit-activity", element: <Editpage /> },
+  { path: "/edit-page", element: <Editpage /> },       // เปลี่ยน path นี้
+  { path: "/edit-activity", element: <EditForm /> },  // ให้ path นี้ไป EditForm
   { path: "/cancel-activity", element: <Cancel /> },
   { path: "/activity-details", element: <Detailsadmin /> },
   { path: "/cancel-form", element: <CancelForm /> },
@@ -27,6 +27,5 @@ export const routes: RouteObject[] = [
   { path: "/close-form", element: <CloseActivityForm /> },
   { path: "/create-activity", element: <CreateActivityForm /> },
   { path: "/close-admin", element: <Close /> },
-  { path: "/edit-activity", element: <EditForm /> },
-  { path: "/edit-page", element: <Editpage /> },
 ];
+
