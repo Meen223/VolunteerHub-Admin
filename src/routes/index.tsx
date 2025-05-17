@@ -21,7 +21,9 @@ export const routes: RouteObject[] = [
   { path: "/edit-activity", element: <EditForm /> },  // ให้ path นี้ไป EditForm
   { path: "/cancel-activity", element: <Cancel /> },
   { path: "/close-admin", element: <Close /> },
-  { path: "/activity-details", element: <Detailsadmin /> },
+  // { path: "/activity-details", element: <Detailsadmin /> },
+  { path: "/activity-details/:id", element: <Detailsadmin /> },
+   // (ถ้าไม่ใช้แล้ว) ลบหรือเปลี่ยนชื่อ /activity-details ออก
   { path: "/cancel-form", element: <CancelForm /> },
   { path: "/approve-form", element: <ApprovalForm /> },
   { path: "/close-form", element: <CloseActivityForm /> },

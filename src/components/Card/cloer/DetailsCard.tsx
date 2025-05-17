@@ -35,14 +35,14 @@ const DetailsCard: React.FC<DetailsCardProps> = ({ activity }) => {
           Maximum: {activity.max_participants} คน
         </p>
         <div className="px-6 py-4 text-right">
-          <Link to={`/activity/${activity.id}`}>
+          <Link to={`/activity-details/${activity.id}`}>
             <button className="bg-pink-500 text-white px-4 py-1 rounded-full text-sm hover:bg-pink-800">
               รายละเอียด
             </button>
           </Link>
         </div>
       </div>
-    </div>
+    </div>  
   );
 };
 
