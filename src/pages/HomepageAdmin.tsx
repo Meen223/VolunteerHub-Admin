@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ นำเข้า useNavigate
 import Baradmin from "../components/Card/cloer/Baradmin";
 import DetailsCard from "../components/Card/cloer/DetailsCard";
 import Pagination from "../components/Card/Pagination";
 
 const HomepageAdmin = () => {
   const [filters, setFilters] = useState({ status: "", type: "" });
+  const navigate = useNavigate(); // ✅ ใช้งาน navigate
 
   const activities = [
     { id: 1, name: "กิจกรรม A", status: "อนุมัติ", type: "อาสา" },
@@ -30,7 +32,8 @@ const HomepageAdmin = () => {
             key={activity.id}
             name={activity.name}
             status={activity.status}
-            type={activity.type} // ✅ เพิ่มตรงนี้
+            type={activity.type}
+            onClick={() => navigate("/activity-details")} // ✅ กดแล้วไปหน้า details
           />
         ))}
       </div>
@@ -43,7 +46,3 @@ const HomepageAdmin = () => {
 };
 
 export default HomepageAdmin;
-
-
-
-

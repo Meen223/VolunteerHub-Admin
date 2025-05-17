@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 function DetailCard({ name, status, type, dateRange, capacity, hours }) {
+  const navigate = useNavigate(); // ✅ ใช้ navigate
+
   const statusColor =
     status === "อนุมัติ"
       ? "text-green-600"
@@ -35,7 +39,10 @@ function DetailCard({ name, status, type, dateRange, capacity, hours }) {
         <p className="text-xs text-gray-600 mb-3">⏱️ {hours} ชั่วโมง</p>
 
         <div className="text-right">
-          <button className="bg-pink-500 text-white px-4 py-1 rounded-full text-sm hover:bg-pink-800 transition">
+          <button
+            onClick={() => navigate("/activity-details")} // ✅ ไปที่หน้า Details
+            className="bg-pink-500 text-white px-4 py-1 rounded-full text-sm hover:bg-pink-800 transition"
+          >
             รายละเอียด
           </button>
         </div>
