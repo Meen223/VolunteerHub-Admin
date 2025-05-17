@@ -45,7 +45,7 @@ function Detailsadmin() {
   if (!activity) {
     return <p className="p-6">ไม่พบข้อมูลกิจกรรม</p>;
   }
-  
+
   const {
     title,
     description,
@@ -105,12 +105,12 @@ function Detailsadmin() {
       {/* ปุ่มล่าง */}
       <div className="absolute bottom-2 left-6 right-6 flex justify-between gap-4">
         <button
-          onClick={() => navigate("/close-admin")}
-          className="flex-grow bg-black text-white font-medium text-xs rounded-full hover:bg-gray-500 py-2"
+          onClick={() => navigate(`/close-admin/${activity.id}`)}
+          className="bg-gray-800 text-white px-4 py-1 rounded-full text-sm hover:bg-gray-400"
         >
           ปิด
         </button>
-        
+
         <button
           onClick={() => navigate(`/edit-activity/${id}`)}
           className="flex-grow bg-[#c57c23] text-white font-medium text-xs rounded-full hover:bg-yellow-900 py-2"

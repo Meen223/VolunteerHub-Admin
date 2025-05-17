@@ -22,7 +22,7 @@ export const routes: RouteObject[] = [
   { path: "/edit-page", element: <Editpage /> },       
   { path: "/edit-activity/:id",  element: <EditForm /> },  
   { path: "/cancel-activity", element: <Cancel /> },
-  { path: "/close-admin", element: <Close /> },
+  { path: "/close-admin/:id", element: <Close /> },
   // { path: "/activity-details", element: <Detailsadmin /> },
   { path: "/activity-details/:id", element: <Detailsadmin /> },
    // (ถ้าไม่ใช้แล้ว) ลบหรือเปลี่ยนชื่อ /activity-details ออก
@@ -31,6 +31,6 @@ export const routes: RouteObject[] = [
   { path: "/close-form", element: <CloseActivityForm /> },
   { path: "/create-activity", element: <CreateActivityForm /> },
   { path: "/approve-activity/approve-form", element: <ApprovalForm /> },  //
-  { path: "/close-admin", element: <Close /> },
+  
 ];
 
