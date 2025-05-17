@@ -1,3 +1,5 @@
+// src/routes/index.tsx
+
 import { type RouteObject, Navigate } from "react-router-dom";
 import Loginpageadmin from "../pages/Loginpage.admin";
 import HomepageAdmin from "../pages/HomepageAdmin";
@@ -9,9 +11,11 @@ import CancelForm from "../pages/CancelForm";
 import ApprovalForm from "../pages/ApproveForm";
 import CloseActivityForm from "../pages/CloseActivityForm";
 import CreateActivityForm from "../pages/CreateActivityForm";
-
+import Close from "../pages/Close.admin";
+import EditForm from "../pages/EditForm";
 
 export const routes: RouteObject[] = [
+  
   { path: "/", element: <Loginpageadmin /> },
   { path: "/home", element: <HomepageAdmin /> },
   { path: "/approve-activity", element: <Apporove /> },
@@ -22,5 +26,7 @@ export const routes: RouteObject[] = [
   { path: "/approve-form", element: <ApprovalForm /> },
   { path: "/close-form", element: <CloseActivityForm /> },
   { path: "/create-activity", element: <CreateActivityForm /> },
-  { path: "/home", element: <Navigate to="/" replace /> },
+  { path: "/close-admin", element: <Close /> },
+  { path: "/edit-activity", element: <EditForm /> },
+  { path: "/edit-page", element: <Editpage /> },
 ];

@@ -1,8 +1,16 @@
-///การ์ดยาว แก้ปุ่ม แก้สี
+interface TrainingCardProps {
+  buttonText?: string;
+  buttonColor?: string;
+  buttonHover?: string;
+  onClick?: () => void; // ✅ เพิ่ม onClick เป็น prop
+}
 
-
-
-function TrainingCard({ buttonText = "ยกเลิก", buttonColor = "bg-gray-800", buttonHover = "hover:bg-gray-700" }) {
+function TrainingCard({
+  buttonText = "ยกเลิก",
+  buttonColor = "bg-gray-800",
+  buttonHover = "hover:bg-gray-700",
+  onClick, // ✅ รับ onClick
+}: TrainingCardProps) {
   return (
     <div className="flex shadow-lg rounded-lg bg-white overflow-hidden mt-4 mx-4">
       <div className="bg-green-300 flex items-center justify-center px-8 py-6 min-w-[100px]">
@@ -16,6 +24,7 @@ function TrainingCard({ buttonText = "ยกเลิก", buttonColor = "bg-gra
         <div className="flex justify-between items-center">
           <p className="text-red-600 font-medium">วันที่เริ่มต้น - วันที่สิ้นสุด</p>
           <button
+            onClick={onClick} // ✅ ใช้ onClick ที่รับเข้ามา
             className={`${buttonColor} text-white text-sm rounded-full px-16 py-2 ${buttonHover} focus:outline-none`}
           >
             {buttonText}

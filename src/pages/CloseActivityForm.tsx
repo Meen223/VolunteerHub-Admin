@@ -1,4 +1,14 @@
+import { useNavigate } from "react-router-dom";
+
 export default function CloseActivityForm() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: submit form data
+    console.log("Form submitted");
+  };
+
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-2xl shadow-md space-y-6 font-sans mt-16">
       {/* Header */}
@@ -6,6 +16,7 @@ export default function CloseActivityForm() {
         <h2 className="text-gray-900 text-base font-normal">ปิดกิจกรรม</h2>
         <button
           type="button"
+          onClick={() => navigate("/close-admin")} // ✅ ปุ่ม X กลับไป /close-admin
           className="text-gray-400 hover:text-gray-600 focus:outline-none"
           aria-label="Close"
         >
@@ -23,7 +34,7 @@ export default function CloseActivityForm() {
       </div>
 
       {/* Form */}
-      <form className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label
             htmlFor="closeDate"
