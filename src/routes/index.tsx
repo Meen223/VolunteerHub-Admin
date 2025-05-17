@@ -1,24 +1,25 @@
 import { type RouteObject, Navigate } from "react-router-dom";
-import ActivityList from "../pages/ActivityList";
-import ActivityDetail from "../pages/ActivityDetail";
-import LoginPage from "../pages/LoginPage";
-import NewActivity from "../pages/NewActivity";
-import EditActivityDetail from "../pages/EditActivityDetail";
-import EditActivities from "../pages/EditActivitiesList";
-import ApproveActivity from "../pages/ApproveActivity";
-import CancelActivity from "../pages/CancelActivity";
+import HomepageAdmin from "../pages/HomepageAdmin";
+import Loginpageadmin from "../pages/Loginpage.admin";
+import Editpage from "../pages/Editpage.admin";
+import Apporove from "../pages/Approve.admin";
+import Cancel from "../pages/Cancel.admin";
+import Detailsadmin from "../pages/Details.admin";
+import CancelForm from "../pages/CancelForm";
+import ApprovalForm from "../pages/ApproveForm";
+import CloseActivityForm from "../pages/CloseActivityForm";
+import CreateActivityForm from "../pages/CreateActivityForm";
 
 export const routes: RouteObject[] = [
-  
-  { path: "/activities", element: <ActivityList /> },
-  { path: "/activities/:id", element: <ActivityDetail /> },
-  { path: "/activities/new", element: <NewActivity /> },
-  { path: "/login", element: <LoginPage /> },
-  { path: "/activities/:id", element: <ActivityDetail /> },
-  { path: "/activities/edit", element: <EditActivities /> },
-  { path: "/activities/:id/edit",element: <EditActivityDetail />,},
-  { path: "/activities/:id/approve", element: <ApproveActivity /> },
-  { path: "/activities/:id/cancel", element: <CancelActivity /> },
+  { path: "/", element: <HomepageAdmin /> },
+  { path: "/admin-login", element: <Loginpageadmin /> },
+  { path: "/edit-activity", element: <Editpage /> },
+  { path: "/approve-activity", element: <Apporove /> },
+  { path: "/cancel-activity", element: <Cancel /> },
+  { path: "/activity-details", element: <Detailsadmin /> },
+  { path: "/cancel-form", element: <CancelForm /> },
+  { path: "/approve-form", element: <ApprovalForm /> },
+  { path: "/close-form", element: <CloseActivityForm /> },
+  { path: "/create-activity", element: <CreateActivityForm /> },
   { path: "/home", element: <Navigate to="/" replace /> },
-
 ];
