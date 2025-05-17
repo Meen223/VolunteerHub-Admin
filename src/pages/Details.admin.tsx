@@ -110,12 +110,14 @@ function Detailsadmin() {
         >
           ปิด
         </button>
+        
         <button
           onClick={() => navigate(`/edit-activity/${id}`)}
           className="flex-grow bg-[#c57c23] text-white font-medium text-xs rounded-full hover:bg-yellow-900 py-2"
         >
           แก้ไข
         </button>
+
         <button
           onClick={() => navigate(`/cancel-activity/${id}`)}
           className="flex-grow bg-[#d23d3d] text-white font-medium text-xs rounded-full hover:bg-red-800 py-2"

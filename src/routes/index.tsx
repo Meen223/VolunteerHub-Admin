@@ -19,8 +19,8 @@ export const routes: RouteObject[] = [
   { path: "/", element: <Loginpageadmin /> },
   { path: "/home", element: <HomepageAdmin /> },
   { path: "/approve-activity", element: <Apporove /> },
-  { path: "/edit-page", element: <Editpage /> },       // เปลี่ยน path นี้
-  { path: "/edit-activity", element: <EditForm /> },  // ให้ path นี้ไป EditForm
+  { path: "/edit-page", element: <Editpage /> },       
+  { path: "/edit-activity/:id",  element: <EditForm /> },  
   { path: "/cancel-activity", element: <Cancel /> },
   { path: "/close-admin", element: <Close /> },
   // { path: "/activity-details", element: <Detailsadmin /> },

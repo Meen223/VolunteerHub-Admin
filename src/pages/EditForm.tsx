@@ -1,67 +1,175 @@
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function EditForm() {
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [activityType, setActivityType] = useState("");
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+    setLoading(true);
+    fetch(`http://localhost:3001/activity/${id}`)
+      .then(res => {
+        if (!res.ok) throw new Error("ไม่พบกิจกรรมนี้");
+        return res.json();
+      })
+      .then(data => {
+        setTitle(data.title);
+        setDescription(data.description);
+        setStartDate(data.start_datetime.slice(0, 10));
+        setStartTime(data.start_datetime.slice(11, 16));
+        setEndTime(data.end_datetime.slice(11, 16));
+        setActivityType(data.activity_type_id.toString());
+      })
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // ✅ Logic บันทึกข้อมูล
-    console.log("Activity updated");
+    setError(null);
+    const start_datetime = `${startDate} ${startTime}:00`;
+    const end_datetime = `${startDate} ${endTime}:00`;
+
+    try {
+      const res = await fetch(`http://localhost:3001/activity/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          description,
+          start_datetime,
+          end_datetime,
+          activity_type_id: parseInt(activityType, 10),
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.message || "แก้ไขกิจกรรมไม่สำเร็จ");
+      }
+
+      navigate(`/activity-details/${id}`);
+    } catch (err: any) {
+      setError(err.message);
+    }
   };
 
+  if (loading) return <p className="p-6 text-center">Loading…</p>;
+  if (error) return <p className="p-6 text-center text-red-500">Error: {error}</p>;
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
-      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-lg p-8 relative border border-yellow-300">
-        {/* ปุ่มปิด */}
+    <div className="fixed inset-x-0 top-16 bottom-0 z-50 overflow-auto bg-white bg-opacity-30 p-4">
+      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-3xl mx-auto p-8 max-h-[calc(100vh-4rem)] overflow-y-auto">
         <button
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-          onClick={() => navigate(-1)} // ย้อนกลับ
+          onClick={() => navigate(-1)}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          ×
         </button>
 
-        <h2 className="text-center text-lg font-semibold text-gray-800 mb-6">แก้ไขข้อมูลกิจกรรม</h2>
+        <h2 className="text-center text-2xl font-semibold mb-6">
+          แก้ไขข้อมูลกิจกรรม
+        </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* ชื่อกิจกรรม */}
           <div>
-            <label className="block mb-1 text-sm text-gray-600">ชื่อกิจกรรม</label>
-            <input type="text" className="w-full rounded-lg border border-gray-300 px-4 py-2" />
+            <label className="block mb-1 text-sm font-medium text-gray-700">
+              ชื่อกิจกรรม
+            </label>
+            <input
+              type="text"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </div>
 
+          {/* รายละเอียด */}
           <div>
-            <label className="block mb-1 text-sm text-gray-600">รายละเอียด</label>
-            <textarea rows={4} className="w-full rounded-lg border border-gray-300 px-4 py-2 resize-none" />
+            <label className="block mb-1 text-sm font-medium text-gray-700">
+              รายละเอียด
+            </label>
+            <textarea
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              className="w-full h-32 px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </div>
 
-          <div className="flex space-x-4">
-            <div className="w-1/2">
-              <label className="block mb-1 text-sm text-gray-600">วันที่จัดกิจกรรม</label>
-              <input type="date" className="w-full rounded-lg border border-gray-300 px-4 py-2" />
+          {/* วันที่ + เวลา */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">
+                วันที่จัดกิจกรรม
+              </label>
+              <input
+                type="date"
+                value={startDate}
+                onChange={e => setStartDate(e.target.value)}
+                className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
             </div>
-            <div className="w-1/2">
-              <label className="block mb-1 text-sm text-gray-600">เวลาเริ่ม - สิ้นสุด</label>
-              <input type="text" placeholder="เช่น 10:00 - 12:00" className="w-full rounded-lg border border-gray-300 px-4 py-2" />
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">
+                เวลาเริ่ม
+              </label>
+              <input
+                type="time"
+                value={startTime}
+                onChange={e => setStartTime(e.target.value)}
+                className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">
+                เวลาสิ้นสุด
+              </label>
+              <input
+                type="time"
+                value={endTime}
+                onChange={e => setEndTime(e.target.value)}
+                className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
             </div>
           </div>
 
+          {/* ประเภท */}
           <div>
-            <label className="block mb-1 text-sm text-gray-600">ประเภท</label>
-            <input type="text" className="w-full rounded-lg border border-gray-300 px-4 py-2" />
+            <label className="block mb-1 text-sm font-medium text-gray-700">
+              ประเภท
+            </label>
+            <input
+              type="text"
+              value={activityType}
+              onChange={e => setActivityType(e.target.value)}
+              className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </div>
 
+          {/* ปุ่ม ยืนยัน / ยกเลิก */}
           <div className="flex justify-center space-x-4 pt-4">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded-lg"
+              className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               ยืนยัน
             </button>
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-6 rounded-lg"
+              className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
             >
               ยกเลิก
             </button>
