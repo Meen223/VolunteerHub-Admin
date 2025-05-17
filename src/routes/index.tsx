@@ -12,8 +12,10 @@ import CloseActivityForm from "../pages/CloseActivityForm";
 import CreateActivityForm from "../pages/CreateActivityForm";
 import Close from "../pages/Close.admin";
 import EditForm from "../pages/EditForm";
+import RegisterPage from "../pages/RegisterPage";
 
 export const routes: RouteObject[] = [
+  
   { path: "/", element: <Loginpageadmin /> },
   { path: "/home", element: <HomepageAdmin /> },
   { path: "/approve-activity", element: <Apporove /> },
