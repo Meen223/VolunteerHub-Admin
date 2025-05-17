@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate,Link } from "react-router-dom";
 
 export default function CreateActivityForm() {
   const navigate = useNavigate();
@@ -12,13 +13,15 @@ export default function CreateActivityForm() {
       {/* Header */}
       <div className="flex justify-center relative pb-6 border-b border-gray-200">
         <h1 className="text-lg font-semibold">สร้างกิจกรรม</h1>
-        <button
+        
+        <Link
+          to="/home"
           aria-label="Close"
           className="absolute right-0 top-0 p-3 text-xl font-bold text-gray-600 hover:text-gray-900"
           onClick={handleCancel} // กด × กลับ /home
         >
           ×
-        </button>
+        </Link>
       </div>
 
       {/* Form */}

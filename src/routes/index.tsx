@@ -21,11 +21,13 @@ export const routes: RouteObject[] = [
   { path: "/edit-page", element: <Editpage /> },       // เปลี่ยน path นี้
   { path: "/edit-activity", element: <EditForm /> },  // ให้ path นี้ไป EditForm
   { path: "/cancel-activity", element: <Cancel /> },
+  { path: "/close-admin", element: <Close /> },
   { path: "/activity-details", element: <Detailsadmin /> },
   { path: "/cancel-form", element: <CancelForm /> },
   { path: "/approve-form", element: <ApprovalForm /> },
   { path: "/close-form", element: <CloseActivityForm /> },
   { path: "/create-activity", element: <CreateActivityForm /> },
+  { path: "/approve-activity/approve-form", element: <ApprovalForm /> },  //
   { path: "/close-admin", element: <Close /> },
 ];
 
