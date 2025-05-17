@@ -34,5 +34,5 @@ function TrainingCard({
 </div>
   );
 }
- 
+
 export default TrainingCard;

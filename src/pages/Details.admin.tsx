@@ -1,9 +1,21 @@
-function Detailsadmin  ()  {
+import { useNavigate } from "react-router-dom";
+
+function Detailsadmin() {
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate("/home");
+  };
+
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 bg-green-50 rounded-xl shadow-lg relative font-sans min-h-[480px]">
       {/* Header */}
       <div className="flex items-center mb-4">
-        <button aria-label="Back" className="mr-4 text-2xl font-bold">
+        <button
+          aria-label="Back"
+          className="mr-4 text-2xl font-bold"
+          onClick={handleBack}
+        >
           ←
         </button>
         <h1 className="text-2xl font-bold">Lorem Ipsum</h1>
@@ -39,18 +51,29 @@ function Detailsadmin  ()  {
 
       {/* Bottom buttons container */}
       <div className="absolute bottom-2 left-6 right-6 flex justify-between gap-4">
-        <button className="flex-grow bg-black text-white font-medium text-xs rounded-full hover:bg-gray-500 py-2">
+        <button
+          onClick={() => navigate("/close-admin")}
+          className="flex-grow bg-black text-white font-medium text-xs rounded-full hover:bg-gray-500 py-2"
+        >
           ปิด
         </button>
-        <button className="flex-grow bg-[#c57c23] text-white font-medium text-xs rounded-full hover:bg-yellow-900 py-">
+
+        <button
+          onClick={() => navigate("/edit-activity")}
+          className="flex-grow bg-[#c57c23] text-white font-medium text-xs rounded-full hover:bg-yellow-900 py-2"
+        >
           แก้ไข
         </button>
-        <button className="flex-grow bg-[#d23d3d] text-white font-medium text-xs rounded-full hover:bg-red-800 py-2">
+
+        <button
+          onClick={() => navigate("/cancel-activity")}
+          className="flex-grow bg-[#d23d3d] text-white font-medium text-xs rounded-full hover:bg-red-800 py-2"
+        >
           ยกเลิก
         </button>
       </div>
     </div>
   );
-};
+}
 
 export default Detailsadmin;

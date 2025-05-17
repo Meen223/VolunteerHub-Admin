@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Baradmin from "../components/Card/cloer/Baradmin";
-import Pink from "../components/Card/cloer/Pink";
+import DetailsCard from "../components/Card/cloer/DetailsCard";
 import Pagination from "../components/Card/Pagination";
 
 const HomepageAdmin = () => {
@@ -26,7 +26,7 @@ const HomepageAdmin = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredActivities.map((activity) => (
-          <Pink
+          <DetailsCard
             key={activity.id}
             name={activity.name}
             status={activity.status}

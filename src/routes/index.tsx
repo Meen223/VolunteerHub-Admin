@@ -1,3 +1,5 @@
+// src/routes/index.tsx
+
 import { type RouteObject, Navigate } from "react-router-dom";
 import Loginpageadmin from "../pages/Loginpage.admin";
 import HomepageAdmin from "../pages/HomepageAdmin";
@@ -10,13 +12,14 @@ import ApprovalForm from "../pages/ApproveForm";
 import CloseActivityForm from "../pages/CloseActivityForm";
 import CreateActivityForm from "../pages/CreateActivityForm";
 import Close from "../pages/Close.admin";
-
+import EditForm from "../pages/EditForm";
 
 export const routes: RouteObject[] = [
   { path: "/", element: <Loginpageadmin /> },
   { path: "/home", element: <HomepageAdmin /> },
   { path: "/approve-activity", element: <Apporove /> },
-  { path: "/edit-activity", element: <Editpage /> },
+  { path: "/edit-page", element: <Editpage /> },       // เปลี่ยน path นี้
+  { path: "/edit-activity", element: <EditForm /> },  // ให้ path นี้ไป EditForm
   { path: "/cancel-activity", element: <Cancel /> },
   { path: "/close-admin", element: <Close /> },
   { path: "/activity-details", element: <Detailsadmin /> },
@@ -25,9 +28,6 @@ export const routes: RouteObject[] = [
   { path: "/close-form", element: <CloseActivityForm /> },
   { path: "/create-activity", element: <CreateActivityForm /> },
   { path: "/approve-activity/approve-form", element: <ApprovalForm /> },  //
-  
-
-  
-  
-  
+  { path: "/close-admin", element: <Close /> },
 ];
+
