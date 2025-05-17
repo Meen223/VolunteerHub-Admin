@@ -9,6 +9,7 @@ import CancelForm from "../pages/CancelForm";
 import ApprovalForm from "../pages/ApproveForm";
 import CloseActivityForm from "../pages/CloseActivityForm";
 import CreateActivityForm from "../pages/CreateActivityForm";
+import Close from "../pages/Close.admin";
 
 
 export const routes: RouteObject[] = [
@@ -17,10 +18,16 @@ export const routes: RouteObject[] = [
   { path: "/approve-activity", element: <Apporove /> },
   { path: "/edit-activity", element: <Editpage /> },
   { path: "/cancel-activity", element: <Cancel /> },
+  { path: "/close-admin", element: <Close /> },
   { path: "/activity-details", element: <Detailsadmin /> },
   { path: "/cancel-form", element: <CancelForm /> },
   { path: "/approve-form", element: <ApprovalForm /> },
   { path: "/close-form", element: <CloseActivityForm /> },
   { path: "/create-activity", element: <CreateActivityForm /> },
-  { path: "/home", element: <Navigate to="/" replace /> },
+  { path: "/approve-activity/approve-form", element: <ApprovalForm /> },  //
+  
+
+  
+  
+  
 ];

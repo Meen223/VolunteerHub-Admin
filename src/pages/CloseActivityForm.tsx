@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
+
 export default function CloseActivityForm() {
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-2xl shadow-md space-y-6 font-sans mt-16">
       {/* Header */}
       <div className="flex justify-between items-center">
         <h2 className="text-gray-900 text-base font-normal">ปิดกิจกรรม</h2>
-        <button
-          type="button"
+        <Link
+          to ="/Close-admin"
           className="text-gray-400 hover:text-gray-600 focus:outline-none"
           aria-label="Close"
         >
@@ -19,7 +21,7 @@ export default function CloseActivityForm() {
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
-        </button>
+        </Link>
       </div>
 
       {/* Form */}
