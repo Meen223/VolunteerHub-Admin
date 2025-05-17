@@ -7,9 +7,11 @@ import Pagination from '../components/Card/Pagination'
 const HomepageAdmin: React.FC = () => {
   const [activities, setActivities] = useState<Activity[]>([])
   const [error, setError] = useState<string | null>(null)
+  const [page, setPage] = useState(1)        // state หน้า
+  const [totalPages, setTotalPages] = useState(1) // รวมหน้า (จาก backend)
 
   useEffect(() => {
-    fetch('http://localhost:3001/activity/get')
+    fetch(`http://localhost:3001/activity/get?page=${page}`)
       .then(res => {
         if (!res.ok) throw new Error('Fail to fetch activities')
         return res.json() as Promise<{
@@ -20,10 +22,12 @@ const HomepageAdmin: React.FC = () => {
         }>
       })
       .then(payload => {
-        setActivities(payload.data)  
+        setActivities(payload.data)
+        const totalPagesCalc = Math.ceil(payload.total / payload.limit)
+        setTotalPages(totalPagesCalc)
       })
       .catch(err => setError(err.message))
-  }, [])
+  }, [page])  // เพิ่ม page เป็น dependency เพื่อ fetch ใหม่เมื่อเปลี่ยนหน้า
 
   return (
     <div>
@@ -36,11 +40,14 @@ const HomepageAdmin: React.FC = () => {
       </div>
 
       <div className="flex justify-center mt-8">
-        <Pagination />
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
       </div>
     </div>
   )
 }
 
 export default HomepageAdmin
-
