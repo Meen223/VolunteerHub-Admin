@@ -1,7 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-function Baradmin() {
-  const navigate = useNavigate(); // ✅ ต้องอยู่ใน component function
+function Baradmin({ onFilterChange }) {
+  const [status, setStatus] = useState("");
+  const [type, setType] = useState("");
+
+  const handleStatusChange = (e) => {
+    const selectedStatus = e.target.value;
+    setStatus(selectedStatus);
+    onFilterChange({ status: selectedStatus, type });
+  };
+
+  const handleTypeChange = (e) => {
+    const selectedType = e.target.value;
+    setType(selectedType);
+    onFilterChange({ status, type: selectedType });
+  };
 
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between p-2 bg-white rounded-md my-4">
@@ -11,21 +25,30 @@ function Baradmin() {
           placeholder="ค้นหา"
           className="px-8 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <select className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <select
+          value={type}
+          onChange={handleTypeChange}
+          className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           <option value="">ประเภท</option>
           <option value="อาสา">อาสา</option>
           <option value="ช่วยงาน">ช่วยงาน</option>
           <option value="อบรม">อบรม</option>
         </select>
-        <select className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option>สถานะ</option>
-          <option>อนุมัติ</option>
-          <option>ปฏิเสธ</option>
+
+        <select
+          value={status}
+          onChange={handleStatusChange}
+          className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">สถานะ</option>
+          <option value="อนุมัติ">อนุมัติ</option>
+          <option value="ปฏิเสธ">ปฏิเสธ</option>
         </select>
       </div>
 
-      <button
-        onClick={() => navigate("/create-activity")} // ✅ ใช้ navigate ที่นี่
+      <Link
+        to="/create-activity"
         className="px-4 py-2 border border-gray-300 rounded-md hover:bg-blue-500 hover:text-white flex items-center mt-2 sm:mt-0"
       >
         <svg
@@ -38,11 +61,9 @@ function Baradmin() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
         </svg>
         <span>สร้างกิจกรรม</span>
-      </button>
+      </Link>
     </div>
   );
 }
 
 export default Baradmin;
-
-

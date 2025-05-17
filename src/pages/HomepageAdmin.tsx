@@ -34,6 +34,7 @@ const HomepageAdmin: React.FC = () => {
           <DetailsCard key={act.id} activity={act} />
         ))}
       </div>
+
       <div className="flex justify-center mt-8">
         <Pagination />
       </div>
@@ -42,3 +43,4 @@ const HomepageAdmin: React.FC = () => {
 }
 
 export default HomepageAdmin
+

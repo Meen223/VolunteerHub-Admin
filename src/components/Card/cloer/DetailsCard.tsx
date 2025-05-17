@@ -39,3 +39,4 @@ const DetailsCard: React.FC<DetailsCardProps> = ({ activity }) => {
 }
 
 export default DetailsCard
+
