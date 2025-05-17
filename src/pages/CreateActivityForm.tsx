@@ -1,4 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 export default function CreateActivityForm() {
+  const navigate = useNavigate();
+
+  const handleCancel = () => {
+    navigate("/home");
+  };
+
   return (
     <div className="max-w-xl mx-auto mt-16 p-8 bg-white rounded-xl shadow-md relative font-sans">
       {/* Header */}
@@ -7,6 +15,7 @@ export default function CreateActivityForm() {
         <button
           aria-label="Close"
           className="absolute right-0 top-0 p-3 text-xl font-bold text-gray-600 hover:text-gray-900"
+          onClick={handleCancel} // กด × กลับ /home
         >
           ×
         </button>
@@ -84,11 +93,12 @@ export default function CreateActivityForm() {
           <button
             type="button"
             className="w-36 rounded-md bg-gray-300 py-2 text-gray-700 hover:bg-gray-400 transition"
+            onClick={handleCancel} // กดยกเลิกกลับ /home
           >
             ยกเลิก
           </button>
         </div>
       </form>
     </div>
-  )
+  );
 }
