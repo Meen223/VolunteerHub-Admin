@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Baradmin({ onFilterChange }) {
+function Barstaff({ onFilterChange }) {
   const [status, setStatus] = useState("");
   const [type, setType] = useState("");
 
@@ -23,12 +23,12 @@ function Baradmin({ onFilterChange }) {
         <input
           type="text"
           placeholder="ค้นหา"
-          className="px-8 py-2 rounded-md border  border-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-8 py-2 rounded-md border  border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <select
           value={type}
           onChange={handleTypeChange}
-          className="px-4 py-2 rounded-md border border-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">ประเภท</option>
           <option value="อาสา">อาสา</option>
@@ -39,7 +39,7 @@ function Baradmin({ onFilterChange }) {
         <select
           value={status}
           onChange={handleStatusChange}
-          className="px-4 py-2 rounded-md border border-white focus:outline-none focus:ring-2 focus:ring-blue-500  "
+          className="px-4 py-2 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500  "
         >
           <option value="">สถานะ</option>
           <option value="อนุมัติ">อนุมัติ</option>
@@ -48,8 +48,8 @@ function Baradmin({ onFilterChange }) {
       </div>
 
       <Link   /// แก้  UI
-        to="/create-activity"
-        className="px-4 py-2 border border-white hover:border-blue-500 hover:shadow-xl rounded-md hover:bg-blue-500 hover:text-white flex items-center mt-2 sm:mt-0"
+        to="/detail-staff"
+        className="px-4 py-2 border border-gray-700 hover:border-blue-500 hover:shadow-xl rounded-md hover:bg-blue-500 hover:text-white flex items-center mt-2 sm:mt-0"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -60,10 +60,10 @@ function Baradmin({ onFilterChange }) {
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
         </svg>
-        <span>สร้างกิจกรรม</span>
+        <span>สร้าง Staff</span>
       </Link>
     </div>
   );
 }
 
-export default Baradmin;
+export default Barstaff;

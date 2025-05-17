@@ -12,6 +12,8 @@ import CloseActivityForm from "../pages/CloseActivityForm";
 import CreateActivityForm from "../pages/CreateActivityForm";
 import Close from "../pages/Close.admin";
 import EditForm from "../pages/EditForm";
+import StudentList from "../pages/Staffpage";
+import Staffdetail from "../pages/Staffdetail";
 
 export const routes: RouteObject[] = [
   { path: "/", element: <Loginpageadmin /> },
@@ -28,5 +30,7 @@ export const routes: RouteObject[] = [
   { path: "/create-activity", element: <CreateActivityForm /> },
   { path: "/approve-activity/approve-form", element: <ApprovalForm /> },  //
   { path: "/close-admin", element: <Close /> },
+  { path: "/staff-home", element: <StudentList /> },
+  { path: "/staff-detail", element: <Staffdetail /> },
 ];
 

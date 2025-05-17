@@ -25,8 +25,8 @@ const HomepageAdmin: React.FC = () => {
       .catch(err => setError(err.message))
   }, [])
 
-  return (
-    <div>
+  return ( ///แก้ สี
+    <div className='min-h-screen bg-gradient-to-r from-sky-100 via-yellow-50 to-rose-100' >
       {error && <p className="text-red-500 text-sm">{error}</p>}
       <Baradmin />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-3">

@@ -11,16 +11,16 @@ function Navbaradmin() {
   };
 
   return (
-    <nav className="flex items-center justify-between px-8 py-4 bg-blue-200">
+    <nav className="flex items-center justify-between px-8 py-4 bg-sky-600">
       <div className="flex items-center space-x-2">
-        <span className="font-bold text-lg">VolunteerHub</span>
+        <span className="font-bold text-lg text-white">VolunteerHub</span>
         <div className="ml-6 space-x-6 font-medium text-gray-700">
-          <Link to="/home" className="hover:underline">หน้าหลัก</Link>
-          <Link to="/approve-activity" className="hover:underline">อนุมัติ</Link>
+          <Link to="/home" className="hover:underline text-white">หน้าหลัก</Link>
+          <Link to="/approve-activity" className="hover:underline text-white">อนุมัติ</Link>
         </div>
       </div>
 
-      <div className="relative inline-block text-left">
+      <div className="relative inline-block text-left hover:underline">
         <button
           type="button"
           onClick={() => setDropdownOpen(!dropdownOpen)}
