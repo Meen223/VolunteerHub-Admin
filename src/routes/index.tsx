@@ -1,4 +1,3 @@
-// src/routes/index.tsx
 
 import { type RouteObject, Navigate } from "react-router-dom";
 import Loginpageadmin from "../pages/Loginpage.admin";
