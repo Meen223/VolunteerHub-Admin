@@ -20,7 +20,7 @@ function DetailCard({ name, status, type, dateRange, capacity, hours }) {
       : "bg-gray-300";
 
   return (
-    <div className="border rounded-lg shadow bg-pink-100 transition hover:shadow-lg">
+    <div className="border rounded-lg shadow bg-blue-200 transition hover:shadow-lg">
       {/* ด้านบนซ้ายแสดงประเภท */}
       <div className="flex justify-between px-4 py-1 text-sm">
         <span className={`px-2 py-1 rounded-full font-medium text-black ${typeColor}`}>
