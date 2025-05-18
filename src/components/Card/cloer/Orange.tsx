@@ -1,20 +1,20 @@
 import { useNavigate } from "react-router-dom";
 
-function Orange({ title }) {
+function Orange({ title, backTo }) {
   const navigate = useNavigate();
 
   return (
     <div className="mx-auto mt-6 px-4">
       {/* Header แถบส้ม */}
-      <div className="bg-orange-300 text-black text-lg py-3 px-4 flex items-center shadow-md">
+      <div className="bg-orange-400 text-black text-lg py-3 px-4 flex items-center shadow-md rounded-lg">
         <button
-          onClick={() => navigate("/activity-details")} // ✅ เพิ่มการนำทาง
-          className="mr-4 text-2xl font-bold select-none"
+          onClick={() => navigate(backTo)} 
+          className="mr-4 text-2xl font-bold select-none hover:text-orange-700 transition"
           aria-label="Back"
         >
           ←
         </button>
-        <span>{title}</span>
+        <span className="font-bold tracking-tight">{title}</span>
       </div>
     </div>
   );

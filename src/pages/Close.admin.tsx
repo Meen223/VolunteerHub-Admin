@@ -1,75 +1,106 @@
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Orange from "../components/Card/cloer/Orange";
+import { useEffect, useState } from "react";
+
+function getStatusLabel(status) {
+  switch (status) {
+    case "pending":
+      return "รอดำเนินการ";
+    case "approved":
+      return "อนุมัติแล้ว";
+    case "completed":
+      return "เสร็จสิ้น";
+    case "rejected":
+      return "ไม่อนุมัติ";
+    case "cancelled":
+      return "ยกเลิก";
+    case "draft":
+      return "ฉบับร่าง";
+    default:
+      return "-";
+  }
+}
 
 function Close() {
   const navigate = useNavigate();
-  const { id } = useParams(); // รับ id จาก URL
+  const { id } = useParams();
   const [activity, setActivity] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  // ดึงข้อมูลกิจกรรม
   useEffect(() => {
     if (!id) return;
-    setLoading(true);
     fetch(`http://localhost:3001/activity/${id}`)
-      .then(res => {
-        if (!res.ok) throw new Error("ไม่พบกิจกรรมนี้");
-        return res.json();
-      })
-      .then(data => {
-        setActivity(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      });
+      .then(res => res.json())
+      .then(data => setActivity(data))
+      .catch(() => setActivity(null));
   }, [id]);
 
-  const handleCloseActivity = async () => {
-    if (!id) return;
-    // call API ปิดกิจกรรม
-    try {
-      const res = await fetch(`http://localhost:3001/activity/closeactivity/${id}`, {
-        method: "PUT"
-      });
-      const result = await res.json();
-      if (res.ok) {
-        alert(result.message);
-        navigate("/home");
-      } else {
-        alert(result.message || "เกิดข้อผิดพลาด");
-      }
-    } catch (err) {
-      alert("เกิดข้อผิดพลาด: " + err.message);
-    }
-  };
+  if (!id) return (
+    <div className="flex items-center justify-center min-h-[60vh]">
+      <div className="bg-white p-8 rounded-xl shadow text-green-700 text-lg font-semibold border border-green-300">
+        ไม่พบกิจกรรมที่จะปิด
+      </div>
+    </div>
+  );
 
-  if (loading) return <div className="text-center py-8">กำลังโหลดข้อมูล...</div>;
-  if (error) return <div className="text-center text-red-600 py-8">{error}</div>;
-  if (!activity) return null;
+  if (!activity) return (
+    <div className="flex items-center justify-center min-h-[60vh]">
+      <div className="animate-pulse text-gray-600 text-lg">กำลังโหลดข้อมูลกิจกรรม...</div>
+    </div>
+  );
 
   return (
-    <div>
-      <Orange title="ปิดกิจกรรม" />
-      <div className="max-w-xl mx-auto bg-white rounded-2xl shadow p-6 mt-6">
-        <h2 className="font-bold text-xl mb-2">{activity.title}</h2>
-        <div className="text-gray-700 mb-2">{activity.description}</div>
-        <div className="text-gray-500 mb-2">
-          {new Date(activity.start_datetime).toLocaleString()} - {new Date(activity.end_datetime).toLocaleString()}
+    <div className="max-w-xl mx-auto mt-12 bg-gradient-to-br from-green-100 via-white to-green-50 rounded-2xl shadow-xl p-0 overflow-hidden">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-green-500 to-green-400 py-4 px-8 flex items-center">
+        <h1 className="text-white font-bold text-2xl select-none">ปิดกิจกรรม</h1>
+        <span className="ml-auto inline-block bg-white text-green-700 rounded-full px-4 py-1 text-xs font-bold border border-green-200 shadow">
+          {getStatusLabel(activity.status)}
+        </span>
+      </div>
+
+      <div className="p-8 space-y-6 text-base text-gray-800">
+        <div>
+          <span className="font-semibold text-green-700">ชื่อกิจกรรม: </span>
+          <span>{activity.title}</span>
         </div>
-        <div className="text-gray-700 mb-2">จำนวนผู้เข้าร่วมสูงสุด: {activity.max_participants} คน</div>
-        <div className="text-gray-700 mb-2">ประเภทกิจกรรม: {activity.activity_type_name}</div>
-        <div className="flex justify-end mt-6">
-          <button
-            onClick={handleCloseActivity}
-            className="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-400 transition"
-          >
-            ยืนยันปิดกิจกรรม
-          </button>
+        <div>
+          <span className="font-semibold text-green-700">ประเภท: </span>
+          <span className="inline-block bg-green-200 text-green-900 rounded-full px-3 py-1 text-xs font-bold">
+            {activity.activity_type_name}
+          </span>
         </div>
+        <div>
+          <span className="font-semibold text-green-700">ช่วงเวลา: </span>
+          <span>
+            {new Date(activity.start_datetime).toLocaleString()} – {new Date(activity.end_datetime).toLocaleString()}
+          </span>
+        </div>
+        <div>
+          <span className="font-semibold text-green-700">จำนวนรับ: </span>
+          <span>{activity.max_participants} คน</span>
+        </div>
+        {activity.location && (
+          <div>
+            <span className="font-semibold text-green-700">สถานที่: </span>
+            <span>{activity.location}</span>
+          </div>
+        )}
+        {typeof activity.hour_value !== "undefined" && (
+          <div>
+            <span className="font-semibold text-green-700">ชั่วโมงจิตอาสา: </span>
+            <span>{activity.hour_value} ชั่วโมง</span>
+          </div>
+        )}
+      </div>
+
+      <div className="px-8 pb-8">
+        <button
+          className="w-full bg-gradient-to-r from-green-600 to-green-400 hover:from-green-800 hover:to-green-600 text-white font-semibold rounded-xl shadow-lg py-3 text-lg transition-all duration-200"
+          onClick={() => {
+            navigate(`/close-form?id=${id}`);
+          }}
+        >
+          ไปหน้ายืนยันการปิดกิจกรรม
+        </button>
       </div>
     </div>
   );
