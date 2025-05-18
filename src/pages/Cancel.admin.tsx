@@ -9,7 +9,7 @@ function Cancel() {
 
   useEffect(() => {
     if (!activityId) return;
-    fetch(`http://localhost:3001/activity/${activityId}`)
+    fetch(`http://localhost:3002/activity/${activityId}`)
       .then(res => res.json())
       .then(data => setActivity(data))
       .catch(() => setActivity(null));

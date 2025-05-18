@@ -8,7 +8,7 @@ function Apporove() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        fetch("http://localhost:3001/activity/get?status=pending")
+        fetch("http://localhost:3002/activity/get?status=pending")
             .then((res) => {
                 if (!res.ok) throw new Error("ไม่สามารถโหลดกิจกรรมได้");
                 return res.json();

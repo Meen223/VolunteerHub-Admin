@@ -18,7 +18,7 @@ export default function EditForm() {
   useEffect(() => {
     if (!id) return;
     setLoading(true);
-    fetch(`http://localhost:3001/activity/${id}`)
+    fetch(`http://localhost:3002/activity/${id}`)
       .then(res => {
         if (!res.ok) throw new Error("ไม่พบกิจกรรมนี้");
         return res.json();
@@ -42,7 +42,7 @@ export default function EditForm() {
     const end_datetime = `${startDate} ${endTime}:00`;
 
     try {
-      const res = await fetch(`http://localhost:3001/activity/${id}`, {
+      const res = await fetch(`http://localhost:3002/activity/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

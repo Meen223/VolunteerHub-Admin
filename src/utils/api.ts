@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3001",       // เปลี่ยนเป็น URL ของ Backend คุณ
+  baseURL: "http://localhost:3002",       // เปลี่ยนเป็น URL ของ Backend คุณ
   headers: { "Content-Type": "application/json" },
 });
 

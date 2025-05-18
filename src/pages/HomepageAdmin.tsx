@@ -17,7 +17,7 @@ const HomepageAdmin: React.FC = () => {
   const { theme } = useTheme(); // <- เพิ่มตรงนี้
  
   useEffect(() => {
-    let url = `http://localhost:3001/activity/get?page=${page}&limit=${PAGE_LIMIT}`;
+    let url = `http://localhost:3002/activity/get?page=${page}&limit=${PAGE_LIMIT}`;
     if (filters.status) url += `&status=${filters.status}`;
     if (filters.type) url += `&activity_type_id=${filters.type}`;
     if (filters.search) url += `&search=${encodeURIComponent(filters.search)}`;

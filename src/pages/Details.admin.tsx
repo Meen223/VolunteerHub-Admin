@@ -13,7 +13,7 @@ function Detailsadmin() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:3001/activity/${id}`)
+    fetch(`http://localhost:3002/activity/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("ไม่พบข้อมูลกิจกรรม");
         return res.json();

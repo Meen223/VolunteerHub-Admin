@@ -12,7 +12,7 @@ export default function CancelForm() {
     if (!activityId) return alert("ไม่พบรหัสกิจกรรม");
 
     // PATCH ไปยัง backend
-    const res = await fetch(`http://localhost:3001/admin/cancel/${activityId}`, {
+    const res = await fetch(`http://localhost:3002/admin/cancel/${activityId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       // body: JSON.stringify({ reason }), // ถ้า backend รับเหตุผลด้วย ให้ใส่บรรทัดนี้

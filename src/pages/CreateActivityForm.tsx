@@ -52,7 +52,7 @@ export default function CreateActivityForm() {
     }
 
     try {
-      const res = await fetch("http://localhost:3001/admin/post", {
+      const res = await fetch("http://localhost:3002/admin/post", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -11,7 +11,7 @@ export default function ApprovalForm() {
 
   useEffect(() => {
     if (!activityId) return;
-    fetch(`http://localhost:3001/activity/${activityId}`)
+    fetch(`http://localhost:3002/activity/${activityId}`)
       .then(res => {
         if (!res.ok) throw new Error("ไม่พบข้อมูลกิจกรรม");
         return res.json();
@@ -22,7 +22,7 @@ export default function ApprovalForm() {
 
   const handleApprove = async () => {
     if (!activityId) return;
-    const res = await fetch(`http://localhost:3001/admin/approve/${activityId}`, {
+    const res = await fetch(`http://localhost:3002/admin/approve/${activityId}`, {
       method: "PATCH",
     });
     if (res.ok) {
@@ -35,7 +35,7 @@ export default function ApprovalForm() {
 
   const handleReject = async () => {
     if (!activityId) return;
-    const res = await fetch(`http://localhost:3001/admin/cancel/${activityId}`, {
+    const res = await fetch(`http://localhost:3002/admin/cancel/${activityId}`, {
       method: "PATCH",
     });
     if (res.ok) {

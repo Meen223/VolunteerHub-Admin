@@ -17,13 +17,13 @@ function TrainingCard({
   onClick,
 }: TrainingCardProps) {
   return (
-    <div className="flex shadow-lg rounded-lg bg-white overflow-hidden mt-4 mx-4">
-      <div className="bg-green-300 flex items-center justify-center px-8 py-6 min-w-[100px]">
-        <span className="text-2xl font-semibold text-black select-none">
-          {activity.activity_type_name || "อบรม"}
-        </span>
-      </div>
-      <div className="flex flex-col flex-grow p-6">
+    <div className="flex shadow-lg rounded-lg bg-white overflow-hidden mt-4 mx-4 h-36"> {/* fix h-36 หรือ h-40 เท่ากันทุกใบ */}
+  <div className="bg-green-300 flex items-center justify-center min-w-[110px] w-32 h-full"> {/* min-w กับ w กำหนดให้ตรงกัน */}
+    <span className="text-xl font-semibold text-black select-none">
+      {activity.activity_type_name || "อบรม"}
+    </span>
+  </div>
+      <div className="flex-1 p-4 flex flex-col justify-center">
         <h2 className="text-lg font-semibold border-b border-gray-300 pb-1 mb-2">
           {activity.title}
         </h2>

@@ -19,7 +19,7 @@ export default function CloseActivityForm() {
     }
     setLoading(true);
     // ยิง request ไป backend เพื่อปิดกิจกรรม
-    const res = await fetch(`http://localhost:3001/activity/closeactivity/${activityId}`, {
+    const res = await fetch(`http://localhost:3002/activity/closeactivity/${activityId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       // body: JSON.stringify({ closeDate, note }), // ถ้าต้องการส่งข้อมูลเพิ่ม

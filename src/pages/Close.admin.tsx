@@ -27,7 +27,7 @@ function Close() {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`http://localhost:3001/activity/${id}`)
+    fetch(`http://localhost:3002/activity/${id}`)
       .then(res => res.json())
       .then(data => setActivity(data))
       .catch(() => setActivity(null));
